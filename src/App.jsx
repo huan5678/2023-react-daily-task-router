@@ -1,8 +1,32 @@
 import "./App.css";
-import { HashRouter, NavLink, Route, Routes } from "react-router-dom";
+import {
+  HashRouter,
+  NavLink,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+const apiUrl = "https://todolist-api.hexschool.io";
 
 const Todo = () => {
-  return <p>這是 Todo 頁面</p>;
+  const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
+  const handleLoginOut = () => {
+    if (!isLogin) {
+      navigate("/login");
+    }
+  };
+  return (
+    <div>
+      <p>這是 Todo 頁面</p>
+      <button type="button" onClick={() => handleLoginOut()}>
+        登出
+      </button>
+    </div>
+  );
 };
 const Login = () => {
   return <p>這是登入頁面</p>;

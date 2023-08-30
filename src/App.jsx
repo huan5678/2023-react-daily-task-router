@@ -5,6 +5,8 @@ import {
   Route,
   Routes,
   useNavigate,
+  useParams,
+  Outlet,
 } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -35,6 +37,21 @@ const Register = () => {
   return <p>這是註冊頁面</p>;
 };
 
+const Post = () => {
+  return (
+    <>
+      <NavLink to="/post/postId:456">Post 詳細頁面</NavLink>
+      <p>Post頁面</p>
+      <Outlet />
+    </>
+  );
+};
+
+const PostId = () => {
+  const params = useParams();
+  return <p>Post ID 是 {params.postId}</p>;
+};
+
 function App() {
   return (
     <div className="container">
@@ -52,6 +69,9 @@ function App() {
           <NavLink to="/todo">
             <p>Todo 頁面</p>
           </NavLink>
+          <NavLink to="/post">
+            <p>Post 頁面</p>
+          </NavLink>
         </div>
         {/* Routes, Route 練習區 */}
         {/* 練習區 */}
@@ -60,6 +80,9 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/todo" element={<Todo />} />
+          <Route path="/post" element={<Post />}>
+            <Route path=":postId" element={<PostId />} />
+          </Route>
           <Route path="*" element={<h1>找不到頁面</h1>} />
         </Routes>
       </HashRouter>
